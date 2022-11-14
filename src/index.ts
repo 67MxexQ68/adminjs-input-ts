@@ -1,6 +1,4 @@
 import Express from "express";
-import bodyParser from "body-parser";
-import express from 'express';
 import bcrypt from 'bcrypt';
 import mongoose from "mongoose";
 import { model, Schema, Types } from 'mongoose';
@@ -177,19 +175,7 @@ const adminRouter = AdminJSExpress.buildAuthenticatedRouter(admin, {
         const user = await User.findOne({ email });
         if (user) {
             console.log(user.email);
-            var mat;
-            const matched = bcrypt.compareSync(password, user.encryptedPassword); /*, (err, res) => {
-          if(err) {
-              console.log('Comparison error: ', err);
-          } 
-          if(res) {
-            mat = true;
-            return user;
-        }
-      }
-      );*/
-            console.log(matched);
-            console.log(mat);
+            const matched = bcrypt.compareSync(password, user.encryptedPassword);
             if (matched) {
                 return user
             }
@@ -204,11 +190,11 @@ app.use(admin.options.rootPath, adminRouter);
 //app.use(bodyParser.json())
 
 /* ------------------------------------ Set up Express ------------------------------------ */
-app.get('/ping', function (req: Express.Request, res: Express.Response) {
-    console.log(`${new Date().toISOString()}: ${req.protocol}://${req.get('host')}${req.originalUrl}`);
-    // req.UserID is available here because of the modification of the global namespace
-    res.json({ Pong: new Date() });
-});
+app.route("/")
+    .get((req, res) => {
+        res.redirect("/admin");
+    });
+
 const port = process.env.PORT || 3000
 app.listen(port, function () {
     console.log("Server is up and running on port "+port+".");
