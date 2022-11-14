@@ -210,8 +210,8 @@ app.get('/ping', function (req: Express.Request, res: Express.Response) {
     res.json({ Pong: new Date() });
 });
 
-app.listen(process.env.PORT || 3000, function () {
-    console.log("Server is up and running on port 3000.");
+app.listen(80, function () {
+    console.log("Server is up and running on port 80.");
 });
 
 export {
