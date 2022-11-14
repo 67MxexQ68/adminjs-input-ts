@@ -209,9 +209,9 @@ app.get('/ping', function (req: Express.Request, res: Express.Response) {
     // req.UserID is available here because of the modification of the global namespace
     res.json({ Pong: new Date() });
 });
-
-app.listen(80, function () {
-    console.log("Server is up and running on port 80.");
+const port = process.env.PORT || 3000
+app.listen(port, function () {
+    console.log("Server is up and running on port "+port+".");
 });
 
 export {
