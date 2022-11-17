@@ -1,5 +1,6 @@
 import Express from "express";
 import bcrypt from 'bcrypt';
+import react from 'React'
 import mongoose from "mongoose";
 import { model, Schema, Types } from 'mongoose';
 import AdminJS from 'adminjs';
@@ -20,6 +21,7 @@ interface IUser {
     email: string;
     encryptedPassword: string;
     role: string;
+    group: string;
 }
 
 const userSchema = new Schema<IUser>({
@@ -34,6 +36,10 @@ const userSchema = new Schema<IUser>({
     role: {
         type: String,
         enum: ['admin', 'restricted'],
+        required: true
+    },
+    group: {
+        type: String,
         required: true
     }
 });
@@ -50,6 +56,7 @@ interface IItem {
     amount: string;
     image: string;
     checklist: boolean;
+    group: string;
 }
 
 const itemSchema = new Schema<IItem>({
@@ -84,7 +91,11 @@ const itemSchema = new Schema<IItem>({
     checklist: {
         type: Boolean,
         required: false
-    }
+    },
+    group: {
+        type: String,
+        required: true
+    },
 });
 
 const Item = model<IItem>('Item', itemSchema);
@@ -142,8 +153,32 @@ const admin = new AdminJS({
         resource: Item,
         options: {
             actions: {
+                list: {
+                    before: async (request, context) => {
+                        const { currentAdmin } = context
+                        return {
+                            ...request,
+                            query: {
+                                ...request.query,
+                                'filters.group': currentAdmin.group
+                            }
+                        }
+                    },
+                },
                 edit: {
+                    before: async (request) => {
+                        const { currentAdmin } = context
+                        request.payload, group = currentAdmin.group
+                        return request
+                    },
                     isAccessible: ({ currentAdmin }) => currentAdmin && currentAdmin.role === 'admin',
+                },
+                add: {
+                    before: async (request) => {
+                        const { currentAdmin } = context
+                        request.payload, group = currentAdmin.group
+                        return request
+                    },
                 },
                 delete: {
                     isAccessible: ({ currentAdmin }) => currentAdmin && currentAdmin.role === 'admin',
@@ -158,6 +193,12 @@ const admin = new AdminJS({
                         show: Components.MyImgView, // this is our custom component
                     },
                 },
+                group: {
+                    components: {
+                        edit: Components.InputGroup, // this is our custom component
+                         add: Components.InputGroup, // this is our custom component
+                    },
+                }
             },
         }
     }],
@@ -197,7 +238,7 @@ app.route("/")
 
 const port = process.env.PORT || 3000
 app.listen(port, function () {
-    console.log("Server is up and running on port "+port+".");
+    console.log("Server is up and running on port " + port + ".");
 });
 
 export {

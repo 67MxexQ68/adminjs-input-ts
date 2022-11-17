@@ -2,7 +2,7 @@ import React from 'react'
 import { BasePropertyProps } from 'adminjs'
 import { Box } from '@adminjs/design-system'
 
-const Edit: React.FC<BasePropertyProps> = (props) => {
+const View: React.FC<BasePropertyProps> = (props) => {
     const { record } = props
     //console.log(record.params)
     const srcImg = record.params['image']
@@ -15,4 +15,4 @@ const Edit: React.FC<BasePropertyProps> = (props) => {
     )
 }
 
-export default Edit
+export default View
