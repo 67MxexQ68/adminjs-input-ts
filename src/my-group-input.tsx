@@ -1,16 +1,22 @@
 import React from 'react'
-import { useCurrentAdmin } from 'adminjs'
+import { useCurrentAdmin, BasePropertyProps } from 'adminjs'
 import { Label, Box, Input} from '@adminjs/design-system'
 //useCurrentAdmin();
-const MyGroupInput = () => {
-    const [currentAdmin, setCurrentAdmin] = useCurrentAdmin()
+const { currentAdmin, setCurrentAdmin } = useCurrentAdmin()
+const MyGroupInput: React.FC<BasePropertyProps> = (props) => {
+    const { property, onChange, record } = props
+    onChange(props.property.name, currentAdmin.group);
+
     return (
-        <Box>
-            <Label>Group</Label>
-            <Input value={currentAdmin.group} readOnly={true} disabled />
+        <Box marginBottom="xxl">
+            <Label>{property.label}</Label>
+            <Input value={currentAdmin.group} readonly={ true } disabled></Input>
+            {/* <DropZone onChange={handleDropZoneChange} />
+            {uploadedPhoto && !photoToUpload && (
+                <DropZoneItem src={uploadedPhoto} />
+            )} */}
         </Box>
     )
-    //return <input value={currentAdmin.group} /> // style={{ display: 'none' }} />
 }
 
 export default MyGroupInput

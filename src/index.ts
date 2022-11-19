@@ -1,6 +1,6 @@
 import Express from "express";
 import bcrypt from 'bcrypt';
-import react from 'React'
+//import react from 'React'
 import mongoose from "mongoose";
 import { model, Schema, Types } from 'mongoose';
 import AdminJS from 'adminjs';
@@ -156,6 +156,9 @@ const admin = new AdminJS({
                 list: {
                     before: async (request, context) => {
                         const { currentAdmin } = context
+                        if (currentAdmin.role === 'admin') {
+                            return request
+                        }
                         return {
                             ...request,
                             query: {
@@ -166,19 +169,27 @@ const admin = new AdminJS({
                     },
                 },
                 edit: {
-                    before: async (request) => {
+                    before: async (request, context) => {
                         const { currentAdmin } = context
-                        request.payload, group = currentAdmin.group
+                        request.payload = {
+                            ...request.payload,
+                            group: currentAdmin.group
+                        }
+                        console.log(request.payload.group)
                         return request
                     },
                     isAccessible: ({ currentAdmin }) => currentAdmin && currentAdmin.role === 'admin',
                 },
-                add: {
-                    before: async (request) => {
+                new: {
+                    before: async (request, context) => {
                         const { currentAdmin } = context
-                        request.payload, group = currentAdmin.group
+                        request.payload = {
+                            ...request.payload,
+                            group: currentAdmin.group
+                        }
+                        console.log(request.payload.group)
                         return request
-                    },
+                    }
                 },
                 delete: {
                     isAccessible: ({ currentAdmin }) => currentAdmin && currentAdmin.role === 'admin',
@@ -193,12 +204,12 @@ const admin = new AdminJS({
                         show: Components.MyImgView, // this is our custom component
                     },
                 },
-                group: {
-                    components: {
-                        edit: Components.InputGroup, // this is our custom component
-                         add: Components.InputGroup, // this is our custom component
-                    },
-                }
+                // group: {
+                //     components: {
+                //         edit: Components.InputGroup, // this is our custom component
+                //         add: Components.InputGroup, // this is our custom component
+                //     },
+                // }
             },
         }
     }],
