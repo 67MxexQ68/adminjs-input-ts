@@ -204,12 +204,12 @@ const admin = new AdminJS({
                         show: Components.MyImgView, // this is our custom component
                     },
                 },
-                // group: {
-                //     components: {
-                //         edit: Components.InputGroup, // this is our custom component
-                //         add: Components.InputGroup, // this is our custom component
-                //     },
-                // }
+                group: {
+                    components: {
+                        //edit: AdminJS.bundle("/workspaces/item-input-admin/my-edit.tsx"), // this is our custom component
+                        edit: Components.GroupInput, 
+                    },
+                },
             },
         }
     }],
