@@ -1,6 +1,6 @@
 # EmptyTS
 
-This project is a simple starter for TypeScript with some good start settings.
+This is a project is a simple starter for TypeScript with some good start settings.
 
 :!: Note: Settings/this file is configured for use in Windows, you might need to modify slashes in order to make it work.
 
