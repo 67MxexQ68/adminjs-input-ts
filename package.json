@@ -6,7 +6,8 @@
   "scripts": {
     "start": "set TS_NODE_FILES=true & node -r ts-node/register/transpile-only src/index.ts",
     "nodemon": "nodemon --watch src/**/*.ts --watch src/**/*.js --exec node -r ts-node/register/transpile-only src/index.ts",
-    "eslint": "eslint src/**/*.{js,ts,tsx}"
+    "eslint": "eslint src/**/*.{js,ts,tsx}",
+    "postinstall": "npx patch-package"
   },
   "keywords": [],
   "author": "Tomas Nilsson",

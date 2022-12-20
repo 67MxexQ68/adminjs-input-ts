@@ -1,0 +1,649 @@
+diff --git a/node_modules/adminjs/lib/.DS_Store b/node_modules/adminjs/lib/.DS_Store
+new file mode 100644
+index 0000000..bb459e8
+Binary files /dev/null and b/node_modules/adminjs/lib/.DS_Store differ
+diff --git a/node_modules/adminjs/lib/backend/utils/options-parser/options-parser.js b/node_modules/adminjs/lib/backend/utils/options-parser/options-parser.js
+index 1fffc88..075087d 100644
+--- a/node_modules/adminjs/lib/backend/utils/options-parser/options-parser.js
++++ b/node_modules/adminjs/lib/backend/utils/options-parser/options-parser.js
+@@ -35,7 +35,7 @@ const getBranding = async (admin, currentAdmin) => {
+     branding
+   } = admin.options;
+   const h = new _viewHelpers.default(admin);
+-  const defaultLogo = h.assetPath('logo.svg');
++  const defaultLogo = h.assetPath('logo.png');
+   const computed = typeof branding === 'function' ? await branding(currentAdmin) : branding;
+   const merged = (0, _merge.default)({}, defaultBranding, computed); // checking for undefined because logo can also be `false` or `null`
+ 
+diff --git a/node_modules/adminjs/lib/frontend/assets/.DS_Store b/node_modules/adminjs/lib/frontend/assets/.DS_Store
+new file mode 100644
+index 0000000..c797399
+Binary files /dev/null and b/node_modules/adminjs/lib/frontend/assets/.DS_Store differ
+diff --git a/node_modules/adminjs/lib/frontend/assets/images/barn.png b/node_modules/adminjs/lib/frontend/assets/images/barn.png
+new file mode 100644
+index 0000000..81a24f2
+Binary files /dev/null and b/node_modules/adminjs/lib/frontend/assets/images/barn.png differ
+diff --git a/node_modules/adminjs/lib/frontend/assets/images/logo.svg b/node_modules/adminjs/lib/frontend/assets/images/logo.svg
+index 35ec25f..63d34bf 100644
+--- a/node_modules/adminjs/lib/frontend/assets/images/logo.svg
++++ b/node_modules/adminjs/lib/frontend/assets/images/logo.svg
+@@ -1,12 +1,163 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<svg width="154" height="29" xmlns="http://www.w3.org/2000/svg">
+-  <title>Atoms/Logotype/AdminJS</title>
+-  <g fill-rule="evenodd">
+-    <path
+-      d="M46.398 28.546c2.666 0 4.115-1.884 4.492-2.753h.058s-.087.405-.058 1.014l.087 1.333h3.912v-9.129c0-3.622-2.231-5.767-6.694-5.767-2.55 0-4.492.609-5.303.986v3.883c.956-.609 2.782-1.246 4.607-1.246 1.913 0 3.101.637 3.101 2.376v.348c-5.216-.725-8.81 1.014-8.81 4.55 0 2.956 2.116 4.405 4.608 4.405zm1.13-3.304c-1.014 0-1.651-.609-1.651-1.536 0-1.362 1.362-2.376 4.607-1.855 0 1.855-1.275 3.391-2.956 3.391zm16.606 3.304c2.116 0 4.028-1.246 4.695-2.695h.058s-.087.376-.058.956l.087 1.333h3.941V7.274h-4.318v6.898c0 .664.058 1.036.08 1.15l.007.037h-.058c-.783-1.13-2.434-2.115-4.55-2.115-3.622 0-6.636 2.87-6.636 7.651 0 4.753 3.014 7.65 6.752 7.65zm.782-3.652c-2 0-3.448-1.623-3.448-3.999 0-2.405 1.449-4 3.448-4 1.74 0 3.478 1.334 3.478 4s-1.739 4-3.478 4zM80.29 28.14v-6.347c0-2.376.696-4.607 3.13-4.607 1.449 0 1.855 1.13 1.855 2.492v8.462h4.318v-6.347c0-2.347.637-4.607 3.1-4.607 1.392 0 1.884 1.1 1.884 2.52v8.434h4.347v-9.07c0-3.855-1.796-5.826-5.013-5.826-2 0-3.739 1.217-4.84 2.898-.58-1.652-1.913-2.55-3.564-2.782a4.669 4.669 0 0 0-1.42.03c-1.884.202-3.507 1.42-4.116 2.926h-.058c.03-.145.145-.492.116-1.014l-.116-1.652h-3.97v14.49h4.347zm24.546-16.316c1.45 0 2.406-.927 2.406-2.318 0-1.45-.957-2.348-2.406-2.348-1.478 0-2.405.899-2.405 2.348 0 1.39.927 2.318 2.405 2.318zm2.174 16.316V13.65h-4.347v14.49h4.347zm8.404 0v-7.216c0-2.174 1.362-3.738 3.39-3.738 1.566 0 1.971 1.188 1.971 2.608v8.346h4.347v-9.07c0-3.826-1.768-5.826-5.042-5.826-2.464 0-4.376 1.74-4.985 3.072h-.058c.03-.145.145-.492.116-1.014l-.116-1.652h-3.97v14.49h4.347zm14.809.406c3.941 0 6.114-1.884 6.114-6.347V7.274h-4.462v15.128c0 1.565-.84 2.347-2.377 2.347-.84 0-1.71-.26-2.173-.521v3.767c.521.26 1.594.55 2.898.55zm15.91 0c4.926 0 7.766-2.26 7.766-6.028 0-3.507-2.26-5.043-5.912-6.463-2.84-1.072-3.97-1.912-3.97-3.13 0-1.333 1.391-2.173 3.536-2.173 1.912 0 3.883.55 5.1 1.275V7.912c-1.304-.58-3.361-1.043-5.448-1.043-4.492 0-7.564 2.376-7.564 6.085 0 3.623 2.145 5.159 5.796 6.492 2.87 1.043 4.115 1.768 4.115 3.159 0 1.014-.927 1.623-2.52 1.855-.552.115-1.19.144-1.856.115-1.883-.115-3.796-.753-5.245-1.506v4.289c1.507.666 3.825 1.188 6.202 1.188z"
+-      fill-rule="nonzero" class="text" fill="#0b151e" />
+-    <path
+-      d="M16.275 0 32.55 28.35h-8.64l-1.999-3.483a3.52 3.52 0 0 0-2.831-1.76l-.222-.007h-5.166a3.52 3.52 0 0 0-3.053 1.767L8.638 28.35H0L16.275 0zm0 12.6c-1.912 0-3.463 1.567-3.463 3.5s1.55 3.5 3.463 3.5c1.912 0 3.463-1.567 3.463-3.5s-1.55-3.5-3.463-3.5z"
+-      class="letter" fill="#4d70eb" />
+-  </g>
++<?xml version="1.0" standalone="no"?>
++<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
++ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
++<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
++ width="300.000000pt" height="300.000000pt" viewBox="0 0 300.000000 300.000000"
++ preserveAspectRatio="xMidYMid meet">
++
++<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
++fill="#000000" stroke="none">
++<path d="M1329 2838 c0 -7 0 -55 1 -107 1 -92 11 -121 39 -121 6 0 11 -11 11
++-25 0 -23 4 -25 46 -25 49 0 74 16 74 49 0 16 6 21 25 21 23 0 25 4 25 40 0
++29 4 40 15 40 8 0 15 5 15 10 0 6 -11 10 -25 10 -16 0 -25 6 -25 15 0 8 -7 15
++-15 15 -8 0 -15 -5 -15 -11 0 -11 -25 -39 -35 -39 -10 0 -35 28 -35 39 0 6 -7
++11 -15 11 -9 0 -15 9 -15 25 0 14 -4 25 -10 25 -5 0 -10 9 -10 20 0 15 -7 20
++-25 20 -14 0 -25 -6 -26 -12z"/>
++<path d="M1400 2520 c0 -5 -11 -10 -25 -10 -14 0 -25 -5 -25 -11 0 -17 -27
++-39 -49 -39 -12 0 -21 -6 -21 -15 0 -9 -9 -15 -25 -15 -14 0 -25 -4 -25 -10 0
++-5 -9 -10 -21 -10 -22 0 -49 -22 -49 -39 0 -6 -11 -11 -25 -11 -14 0 -25 -4
++-25 -10 0 -5 -11 -10 -25 -10 -16 0 -25 -6 -25 -15 0 -9 -9 -15 -25 -15 -14 0
++-25 -4 -25 -10 0 -5 -11 -10 -25 -10 -14 0 -25 -5 -25 -11 0 -14 -25 -39 -39
++-39 -6 0 -11 -11 -11 -25 0 -14 -4 -25 -10 -25 -5 0 -10 -7 -10 -15 0 -8 -7
++-15 -15 -15 -9 0 -15 -9 -15 -25 0 -14 -4 -25 -10 -25 -5 0 -10 -11 -10 -25 0
++-16 -6 -25 -15 -25 -9 0 -15 -9 -15 -23 0 -12 -11 -31 -25 -41 -14 -10 -25
++-27 -25 -37 0 -11 -4 -19 -10 -19 -5 0 -10 -11 -10 -25 0 -16 -6 -25 -15 -25
++-9 0 -15 -9 -15 -21 0 -22 -22 -49 -39 -49 -6 0 -11 -6 -11 -13 0 -7 -9 -19
++-20 -27 -11 -8 -20 -20 -20 -27 0 -7 -7 -13 -15 -13 -9 0 -15 -9 -15 -25 0
++-23 3 -25 50 -25 29 0 50 5 50 11 0 14 25 39 39 39 6 0 11 5 11 11 0 14 25 39
++39 39 6 0 11 11 11 25 0 14 5 25 10 25 6 0 10 11 10 25 0 16 6 25 15 25 9 0
++15 9 15 25 0 14 5 25 10 25 6 0 10 11 10 25 0 16 6 25 15 25 9 0 15 9 15 21 0
++22 22 49 39 49 6 0 11 11 11 25 0 14 5 25 10 25 6 0 10 11 10 25 0 14 5 25 10
++25 6 0 10 11 10 25 0 20 5 25 25 25 16 0 25 6 25 15 0 9 9 15 25 15 14 0 25 5
++25 10 0 6 7 10 15 10 8 0 15 7 15 15 0 9 9 15 25 15 14 0 25 5 25 10 0 6 11
++10 25 10 16 0 25 6 25 15 0 9 9 15 25 15 14 0 25 5 25 10 0 6 9 10 20 10 11 0
++20 7 20 15 0 9 9 15 25 15 14 0 25 5 25 10 0 6 7 10 15 10 8 0 15 5 15 10 0 6
++23 10 50 10 28 0 50 -4 50 -10 0 -5 9 -10 21 -10 22 0 49 -22 49 -39 0 -6 11
++-11 25 -11 14 0 25 -4 25 -10 0 -5 11 -10 25 -10 16 0 25 -6 25 -15 0 -9 9
++-15 25 -15 14 0 25 -4 25 -10 0 -5 11 -10 25 -10 14 0 25 -5 25 -11 0 -17 27
++-39 49 -39 12 0 21 -6 21 -15 0 -9 9 -15 25 -15 20 0 25 -5 25 -25 0 -16 6
++-25 15 -25 9 0 15 -9 15 -23 0 -12 9 -29 20 -37 11 -8 20 -25 20 -37 0 -14 6
++-23 15 -23 9 0 15 -9 15 -25 0 -14 5 -25 10 -25 6 0 10 -11 10 -25 0 -16 6
++-25 15 -25 9 0 15 -9 15 -21 0 -22 22 -49 39 -49 6 0 11 -11 11 -25 0 -14 5
++-25 10 -25 6 0 10 -11 10 -25 0 -16 6 -25 15 -25 8 0 15 -5 15 -11 0 -14 25
++-39 39 -39 6 0 11 -7 11 -15 0 -11 12 -15 45 -15 41 0 45 2 45 25 0 14 -4 25
++-10 25 -5 0 -10 5 -10 11 0 14 -25 39 -39 39 -6 0 -11 5 -11 11 0 14 -25 39
++-39 39 -6 0 -11 11 -11 25 0 14 -4 25 -10 25 -5 0 -10 11 -10 25 0 16 -6 25
++-15 25 -9 0 -15 9 -15 21 0 22 -22 49 -39 49 -6 0 -11 11 -11 25 0 14 -4 25
++-10 25 -5 0 -10 11 -10 25 0 16 -6 25 -15 25 -9 0 -15 9 -15 25 0 14 -4 25
++-10 25 -5 0 -10 11 -10 25 0 16 -6 25 -15 25 -8 0 -15 6 -15 13 0 7 -9 19 -20
++27 -11 8 -20 20 -20 27 0 7 -11 13 -25 13 -14 0 -25 5 -25 10 0 6 -11 10 -25
++10 -16 0 -25 6 -25 15 0 8 -7 15 -15 15 -8 0 -15 -7 -15 -15 0 -8 -4 -15 -10
++-15 -5 0 -10 11 -10 25 0 16 -6 25 -15 25 -8 0 -15 7 -15 15 0 9 -9 15 -25 15
++-14 0 -25 5 -25 10 0 6 -11 10 -25 10 -14 0 -25 5 -25 10 0 6 -9 10 -20 10
++-11 0 -20 7 -20 15 0 9 -9 15 -25 15 -14 0 -25 5 -25 10 0 6 -7 10 -15 10 -8
++0 -15 7 -15 15 0 9 -9 15 -25 15 -14 0 -25 5 -25 10 0 6 -11 10 -25 10 -14 0
++-25 -4 -25 -10z"/>
++<path d="M1400 2375 c0 -9 -9 -15 -25 -15 -14 0 -25 -4 -25 -10 0 -5 -11 -10
++-25 -10 -16 0 -25 -6 -25 -15 0 -8 -9 -15 -20 -15 -11 0 -20 -4 -20 -10 0 -5
++-11 -10 -25 -10 -16 0 -25 -6 -25 -15 0 -8 -7 -15 -15 -15 -8 0 -15 -4 -15
++-10 0 -5 -11 -10 -25 -10 -16 0 -25 -6 -25 -15 0 -9 -9 -15 -25 -15 -14 0 -25
++-4 -25 -10 0 -5 -11 -10 -25 -10 -16 0 -25 -6 -25 -15 0 -8 -4 -15 -10 -15 -5
++0 -10 -11 -10 -25 0 -16 -6 -25 -15 -25 -9 0 -15 -9 -15 -25 0 -14 -4 -25 -10
++-25 -5 0 -10 -11 -10 -25 0 -14 -4 -25 -10 -25 -5 0 -10 -9 -10 -20 0 -11 -7
++-20 -15 -20 -8 0 -15 -7 -15 -15 0 -8 -4 -15 -10 -15 -5 0 -10 -11 -10 -25 0
++-16 -6 -25 -15 -25 -9 0 -15 -9 -15 -25 0 -14 -4 -25 -10 -25 -5 0 -10 -11
++-10 -25 0 -16 -6 -25 -15 -25 -9 0 -15 -9 -15 -21 0 -22 -22 -49 -39 -49 -6 0
++-11 -7 -11 -15 0 -8 -4 -15 -10 -15 -6 0 -10 -47 -10 -120 0 -100 -2 -120 -15
++-120 -8 0 -15 -7 -15 -15 0 -8 7 -15 15 -15 13 0 15 -33 15 -235 l0 -235 160
++0 160 0 0 310 0 310 370 0 370 0 0 -310 0 -310 160 0 160 0 0 124 c0 90 3 126
++13 130 10 5 10 7 0 12 -15 7 -18 104 -3 104 6 0 10 7 10 15 0 8 -4 15 -10 15
++-6 0 -10 63 -10 170 0 144 -2 170 -15 170 -8 0 -15 7 -15 15 0 8 -4 15 -10 15
++-5 0 -10 11 -10 25 0 14 -5 25 -11 25 -17 0 -39 27 -39 49 0 12 -6 21 -15 21
++-9 0 -15 9 -15 25 0 14 -4 25 -10 25 -5 0 -10 11 -10 25 0 16 -6 25 -15 25 -9
++0 -15 9 -15 23 0 12 -9 29 -20 37 -11 8 -20 25 -20 37 0 14 -6 23 -15 23 -9 0
++-15 9 -15 25 0 14 -4 25 -10 25 -5 0 -10 11 -10 25 0 16 -6 25 -15 25 -8 0
++-15 7 -15 15 0 9 -9 15 -25 15 -14 0 -25 5 -25 10 0 6 -11 10 -25 10 -16 0
++-25 6 -25 15 0 9 -9 15 -21 15 -22 0 -49 22 -49 39 0 6 -11 11 -25 11 -14 0
++-25 5 -25 10 0 6 -11 10 -25 10 -16 0 -25 6 -25 15 0 9 -9 15 -25 15 -14 0
++-25 5 -25 10 0 6 -11 10 -25 10 -16 0 -25 6 -25 15 0 9 -9 15 -25 15 -16 0
++-25 -6 -25 -15z m0 -225 c0 -5 11 -10 25 -10 14 0 25 5 25 10 0 6 32 10 75 10
++l75 0 0 -60 0 -60 -75 0 c-43 0 -75 4 -75 10 0 6 -11 10 -25 10 -14 0 -25 -4
++-25 -10 0 -6 -27 -10 -60 -10 l-60 0 0 60 0 60 60 0 c33 0 60 -4 60 -10z m0
++-150 c0 -5 11 -10 25 -10 14 0 25 5 25 10 0 6 32 10 75 10 l75 0 0 -45 c0 -25
++-4 -45 -10 -45 -5 0 -10 -7 -10 -15 0 -12 -14 -15 -65 -15 -51 0 -65 3 -65 15
++0 9 -9 15 -25 15 -16 0 -25 -6 -25 -15 0 -12 -13 -15 -60 -15 l-60 0 0 60 0
++60 60 0 c33 0 60 -4 60 -10z"/>
++<path d="M1160 1510 c0 -5 5 -10 10 -10 6 0 10 -7 10 -15 0 -8 5 -15 11 -15
++14 0 39 -25 39 -39 0 -6 7 -11 15 -11 8 0 15 -4 15 -10 0 -5 9 -10 20 -10 11
++0 20 -7 20 -15 0 -8 5 -15 11 -15 6 0 17 -6 25 -14 8 -8 14 -19 14 -25 0 -6 5
++-11 11 -11 6 0 17 -6 25 -14 8 -8 14 -19 14 -25 0 -6 11 -11 25 -11 16 0 25 6
++25 15 0 8 5 15 11 15 14 0 39 25 39 39 0 6 5 11 11 11 14 0 39 25 39 39 0 6 9
++11 21 11 22 0 49 22 49 39 0 6 5 11 11 11 14 0 39 25 39 39 0 6 7 11 15 11 8
++0 15 5 15 10 0 6 -97 10 -270 10 -173 0 -270 -4 -270 -10z"/>
++<path d="M1110 1460 c0 -5 -7 -10 -15 -10 -13 0 -15 -21 -15 -125 0 -104 2
++-125 15 -125 12 0 15 -18 15 -100 0 -60 4 -100 10 -100 6 0 10 7 10 15 0 8 5
++15 11 15 14 0 39 25 39 39 0 6 5 11 11 11 14 0 39 25 39 39 0 6 10 11 23 11
++12 0 29 9 37 20 8 11 20 20 27 20 7 0 13 5 13 11 0 17 27 39 49 39 12 0 21 5
++21 11 0 14 -25 39 -39 39 -6 0 -11 7 -11 15 0 9 -9 15 -21 15 -19 0 -49 21
++-49 35 0 10 -28 35 -39 35 -6 0 -11 5 -11 11 0 14 -25 39 -39 39 -6 0 -11 7
++-11 15 0 9 -9 15 -25 15 -14 0 -25 5 -25 10 0 6 -4 10 -10 10 -5 0 -10 -4 -10
++-10z"/>
++<path d="M1700 1460 c0 -5 -7 -10 -15 -10 -8 0 -15 -5 -15 -11 0 -6 -6 -17
++-14 -25 -8 -8 -19 -14 -25 -14 -6 0 -11 -6 -11 -13 0 -7 -9 -19 -20 -27 -11
++-8 -20 -20 -20 -27 0 -7 -7 -13 -15 -13 -8 0 -15 -4 -15 -10 0 -5 -11 -10 -25
++-10 -16 0 -25 -6 -25 -15 0 -8 -4 -15 -10 -15 -5 0 -10 -9 -10 -21 0 -22 22
++-49 39 -49 6 0 11 -5 11 -11 0 -16 26 -39 45 -39 19 0 45 -23 45 -39 0 -6 5
++-11 11 -11 14 0 39 -25 39 -39 0 -6 5 -11 11 -11 14 0 39 -25 39 -39 0 -6 7
++-11 15 -11 13 0 15 33 15 235 l0 235 -25 0 c-14 0 -25 -4 -25 -10z"/>
++<path d="M1400 1189 c0 -17 -27 -39 -49 -39 -12 0 -21 -4 -21 -10 0 -5 -7 -10
++-15 -10 -8 0 -15 -6 -15 -13 0 -7 -9 -19 -20 -27 -11 -8 -20 -20 -20 -27 0 -7
++-5 -13 -11 -13 -6 0 -17 -6 -25 -14 -8 -8 -14 -19 -14 -25 0 -6 -11 -11 -25
++-11 -14 0 -25 -4 -25 -10 0 -5 -7 -10 -15 -10 -8 0 -15 -7 -15 -15 0 -13 39
++-15 295 -15 203 0 295 3 295 11 0 14 -25 39 -39 39 -6 0 -11 7 -11 15 0 9 -9
++15 -21 15 -19 0 -49 21 -49 35 0 10 -28 35 -39 35 -6 0 -11 5 -11 11 0 17 -27
++39 -49 39 -12 0 -21 5 -21 10 0 6 -7 10 -15 10 -8 0 -15 7 -15 15 0 9 -9 15
++-25 15 -14 0 -25 -5 -25 -11z"/>
++<path d="M170 890 c0 -7 425 -10 1255 -10 830 0 1255 3 1255 10 0 7 -425 10
++-1255 10 -830 0 -1255 -3 -1255 -10z"/>
++<path d="M940 525 l0 -185 70 0 c40 0 70 4 70 10 0 6 7 10 15 10 12 0 15 15
++15 75 0 60 -3 75 -15 75 -9 0 -15 9 -15 25 0 16 6 25 15 25 12 0 15 13 15 60
++0 47 -3 60 -15 60 -8 0 -15 7 -15 15 0 12 -14 15 -70 15 l-70 0 0 -185z m120
++85 l0 -50 -40 0 -40 0 0 50 0 50 40 0 40 0 0 -50z m-30 -115 c0 -8 7 -15 15
++-15 11 0 15 -12 15 -50 0 -38 -4 -50 -15 -50 -8 0 -15 -4 -15 -10 0 -5 -11
++-10 -25 -10 -24 0 -25 2 -25 75 0 73 1 75 25 75 16 0 25 -6 25 -15z"/>
++<path d="M1260 695 c0 -8 -7 -15 -15 -15 -12 0 -15 -15 -15 -75 0 -43 -4 -75
++-10 -75 -6 0 -10 -32 -10 -75 0 -60 -3 -75 -15 -75 -10 0 -15 -11 -15 -35 0
++-24 5 -35 15 -35 8 0 15 7 15 15 0 8 5 15 10 15 6 0 10 9 10 20 0 17 7 20 50
++20 43 0 50 -3 50 -20 0 -15 7 -20 25 -20 24 0 25 2 25 70 0 56 -3 70 -15 70
++-12 0 -15 15 -15 75 0 43 -4 75 -10 75 -5 0 -10 18 -10 40 0 39 -1 40 -35 40
++-24 0 -35 -5 -35 -15z m40 -150 c0 -51 3 -65 15 -65 8 0 15 -4 15 -10 0 -5 -7
++-10 -15 -10 -8 0 -15 -7 -15 -15 0 -8 -9 -15 -20 -15 -18 0 -20 7 -20 65 0 37
++4 65 10 65 6 0 10 11 10 25 0 14 5 25 10 25 6 0 10 -28 10 -65z"/>
++<path d="M1480 525 l0 -185 25 0 c24 0 25 2 25 70 0 64 2 70 21 70 35 0 49
++-24 49 -84 0 -53 1 -56 25 -56 24 0 25 2 25 70 0 56 -3 70 -15 70 -9 0 -15 9
++-15 25 0 16 6 25 15 25 12 0 15 15 15 75 0 60 -3 75 -15 75 -8 0 -15 7 -15 15
++0 12 -14 15 -70 15 l-70 0 0 -185z m120 85 c0 -27 -4 -50 -10 -50 -5 0 -10 -7
++-10 -15 0 -9 -9 -15 -25 -15 -24 0 -25 2 -25 65 l0 65 35 0 35 0 0 -50z"/>
++<path d="M1750 525 l0 -185 25 0 c14 0 25 5 25 10 0 6 -7 10 -15 10 -12 0 -15
++19 -15 110 0 72 4 110 11 110 23 0 39 -30 39 -74 0 -34 4 -46 15 -46 11 0 15
++-12 15 -46 0 -49 16 -74 49 -74 20 0 21 5 21 185 l0 185 -25 0 c-25 0 -25 -1
++-25 -90 0 -53 -4 -90 -10 -90 -5 0 -10 18 -10 40 0 29 -4 40 -15 40 -11 0 -15
++12 -15 50 l0 50 -35 0 -35 0 0 -185z"/>
++<path d="M200 125 c0 -13 58 -15 465 -15 407 0 465 2 465 15 0 13 -58 15 -465
++15 -407 0 -465 -2 -465 -15z"/>
++<path d="M1160 125 c0 -10 11 -15 35 -15 24 0 35 5 35 15 0 10 -11 15 -35 15
++-24 0 -35 -5 -35 -15z"/>
++<path d="M1280 125 c0 -12 16 -15 85 -15 69 0 85 3 85 15 0 12 -16 15 -85 15
++-69 0 -85 -3 -85 -15z"/>
++<path d="M1480 125 c0 -8 5 -15 10 -15 6 0 10 7 10 15 0 8 -4 15 -10 15 -5 0
++-10 -7 -10 -15z"/>
++<path d="M1530 125 c0 -12 19 -15 110 -15 91 0 110 3 110 15 0 12 -19 15 -110
++15 -91 0 -110 -3 -110 -15z"/>
++<path d="M1770 125 c0 -11 11 -15 40 -15 29 0 40 4 40 15 0 11 -11 15 -40 15
++-29 0 -40 -4 -40 -15z"/>
++<path d="M1870 125 c0 -13 33 -15 235 -15 202 0 235 2 235 15 0 13 -33 15
++-235 15 -202 0 -235 -2 -235 -15z"/>
++<path d="M2390 125 c0 -10 11 -15 35 -15 24 0 35 5 35 15 0 10 -11 15 -35 15
++-24 0 -35 -5 -35 -15z"/>
++<path d="M2560 125 c0 -8 5 -15 10 -15 6 0 10 7 10 15 0 8 -4 15 -10 15 -5 0
++-10 -7 -10 -15z"/>
++<path d="M2630 125 c0 -8 7 -15 15 -15 8 0 15 7 15 15 0 8 -7 15 -15 15 -8 0
++-15 -7 -15 -15z"/>
++</g>
+ </svg>
+diff --git a/node_modules/adminjs/lib/locale/en.js b/node_modules/adminjs/lib/locale/en.js
+index c5c9467..7954b34 100644
+--- a/node_modules/adminjs/lib/locale/en.js
++++ b/node_modules/adminjs/lib/locale/en.js
+@@ -7,48 +7,48 @@ exports.default = void 0;
+ 
+ /* spellchecker: disable */
+ const translations = {
+-  actions: {
+-    new: 'Create new',
+-    edit: 'Edit',
+-    show: 'Show',
+-    delete: 'Delete',
+-    bulkDelete: 'Delete all',
+-    list: 'List'
++    actions: {
++      new: 'Nieuw',
++      edit: 'Bewerk',
++      show: 'Toon',
++      delete: 'Verwijder',
++      bulkDelete: 'Verwijder alles',
++      list: 'Lijst',
+   },
+   buttons: {
+-    save: 'Save',
+-    addNewItem: 'Add New Item',
++    save: 'Bewaar',
++    addNewItem: 'Voeg toe',
+     filter: 'Filter',
+-    applyChanges: 'Apply changes',
+-    resetFilter: 'Reset',
+-    confirmRemovalMany: 'Confirm the removal of {{count}} record',
+-    confirmRemovalMany_plural: 'Confirm the removal of {{count}} records',
+-    logout: 'Log out',
+-    login: 'Log in',
+-    seeTheDocumentation: 'See: <1>the documentation</1>',
+-    createFirstRecord: 'Create First Record'
++    applyChanges: 'Bewaar wijzigingen',
++    resetFilter: 'Herstel',
++    confirmRemovalMany: 'Bevestig verwijdering van {{count}} item(s)',
++    confirmRemovalMany_plural: 'Bevestig verwijdering van {{count}} item(s)',
++    logout: 'Afmelden',
++    login: 'Aanmelden',
++    seeTheDocumentation: 'Zie: <1>De documentatie</1>',
++    createFirstRecord: 'Voeg eerste item toe',
+   },
+   labels: {
+-    navigation: 'Navigation',
+-    pages: 'Pages',
+-    selectedRecords: 'Selected ({{selected}})',
++    navigation: 'Navigatie',
++    pages: 'Pagina',
++    selectedRecords: 'Selecteer ({{selected}})',
+     filters: 'Filters',
+     adminVersion: 'Admin: {{version}}',
+     appVersion: 'App: {{version}}',
+-    loginWelcome: 'Welcome',
+-    dashboard: 'Dashboard'
++    loginWelcome: 'Barn the App',
++    dashboard: 'Barn the App',
+   },
+   properties: {
+-    length: 'Length',
+-    from: 'From',
+-    to: 'To'
++    length: 'Lengte',
++    from: 'Van',
++    to: 'Tot',
+   },
+   resources: {},
+   messages: {
+-    successfullyBulkDeleted: 'successfully removed {{count}} record',
+-    successfullyBulkDeleted_plural: 'successfully removed {{count}} records',
+-    successfullyDeleted: 'Successfully deleted given record',
+-    successfullyUpdated: 'Successfully updated given record',
++    successfullyBulkDeleted: '{{count}} verwijderd',
++    successfullyBulkDeleted_plural: '{{count}} item(s) verwijderd',
++    successfullyDeleted: 'Item succesvol verwijderd',
++    successfullyUpdated: 'Item succesvol bewerkt',
+     thereWereValidationErrors: 'There are validation errors - check them out below',
+     forbiddenError: 'You cannot perform action {{actionName}} on {{resourceId}}',
+     anyForbiddenError: 'You cannot perform given action',
+@@ -67,38 +67,38 @@ const translations = {
+     noActionComponent: 'You have to implement action component for your Action',
+     noRecordsInResource: 'There are no records in this resource',
+     noRecords: 'No records',
+-    confirmDelete: 'Do you really want to remove this item?',
+-    welcomeOnBoard_title: 'Welcome on Board!',
+-    welcomeOnBoard_subtitle: 'Now you are one of us! We prepared a few tips for you to start:',
+-    loginWelcome: 'to AdminJS – the world\'s leading open-source auto-generated admin panel for your Node.js application that allows you to manage all your data in one place',
+-    addingResources_title: 'Adding Resources',
+-    addingResources_subtitle: 'How to add new resources to the sidebar',
+-    customizeResources_title: 'Customize Resources',
+-    customizeResources_subtitle: 'Defining behavior, adding properties and more...',
++    confirmDelete: 'Weet je zeker dat je dit item wilt verwijderen?',
++    welcomeOnBoard_title: 'Welkom bij Barn the app!',
++    welcomeOnBoard_subtitle: 'Je hoort erbij, gebruik en test de beta-versie van BARN:',
++    loginWelcome: 'Weet wat er in je schuur ligt. Barn; jouw digitale schuur. Deel je (bouw)materialen met bekenden.',
++    addingResources_title: 'Voeg items toe',
++    addingResources_subtitle: 'Liggen er spulletjes weg te stoffen in je garage, schuur of zolder? Bied ze aan!',
++    customizeResources_title: 'Eigen cirkel',
++    customizeResources_subtitle: 'Je kiest zelf met wie je je spulletjes deelt',
+     customizeActions_title: 'Customize Actions',
+     customizeActions_subtitle: 'Modifying existing actions and adding new',
+-    writeOwnComponents_title: 'Write Components',
+-    writeOwnComponents_subtitle: 'How to modify the Look and Feel of AdminJS',
++    writeOwnComponents_title: 'Beter voor het milieu',
++    writeOwnComponents_subtitle: 'Zonde om weg te gooien, beter om te delen?',
+     customDashboard_title: 'Custom Dashboard',
+     customDashboard_subtitle: 'How to modify this view and add new Pages on the sidebar',
+     roleBasedAccess_title: 'Role-Based Access Control',
+     roleBasedAccess_subtitle: 'Create user roles and permissions in AdminJS',
+     community_title: 'Join the slack community',
+-    community_subtitle: 'Talk with the creators of AdminJS and other AdminJS users',
+-    foundBug_title: 'Found a Bug? need improvement?',
+-    foundBug_subtitle: 'Raise an issue on our GitHub repo',
++    community_subtitle: 'Deel je ervaringen met de mensen achter Barn',
++    foundBug_title: 'Foutje gevonden? Goed idee bedacht?',
++    foundBug_subtitle: 'Deel',
+     needMoreSolutions_title: 'Need more advanced solutions?',
+     needMoreSolutions_subtitle: 'We are here to provide you a beautiful UX/UI design and tailor made software based (not only) on AdminJS',
+-    invalidCredentials: 'Wrong email and/or password',
++    invalidCredentials: 'Verkeerde email of wachtwoord',
+     keyPlaceholder: 'KEY',
+     valuePlaceholder: 'VALUE',
+     initialKey: 'Key-{{number}}',
+     keyInUse: 'Object keys must be unique.',
+-    keyValuePropertyDefaultDescription: 'All values are stored as text. Keys must be unique, duplicate keys will not be saved.'
++    keyValuePropertyDefaultDescription: 'All values are stored as text. Keys must be unique, duplicate keys will not be saved.',
+   }
+ };
+ var _default = {
+-  language: 'en',
++  language: 'nl',
+   translations
+ };
+ exports.default = _default;
+diff --git a/node_modules/adminjs/src/frontend/assets/.DS_Store b/node_modules/adminjs/src/frontend/assets/.DS_Store
+new file mode 100644
+index 0000000..c797399
+Binary files /dev/null and b/node_modules/adminjs/src/frontend/assets/.DS_Store differ
+diff --git a/node_modules/adminjs/src/frontend/assets/images/barn.png b/node_modules/adminjs/src/frontend/assets/images/barn.png
+new file mode 100644
+index 0000000..81a24f2
+Binary files /dev/null and b/node_modules/adminjs/src/frontend/assets/images/barn.png differ
+diff --git a/node_modules/adminjs/src/frontend/assets/images/logo.svg b/node_modules/adminjs/src/frontend/assets/images/logo.svg
+index 35ec25f..63d34bf 100644
+--- a/node_modules/adminjs/src/frontend/assets/images/logo.svg
++++ b/node_modules/adminjs/src/frontend/assets/images/logo.svg
+@@ -1,12 +1,163 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<svg width="154" height="29" xmlns="http://www.w3.org/2000/svg">
+-  <title>Atoms/Logotype/AdminJS</title>
+-  <g fill-rule="evenodd">
+-    <path
+-      d="M46.398 28.546c2.666 0 4.115-1.884 4.492-2.753h.058s-.087.405-.058 1.014l.087 1.333h3.912v-9.129c0-3.622-2.231-5.767-6.694-5.767-2.55 0-4.492.609-5.303.986v3.883c.956-.609 2.782-1.246 4.607-1.246 1.913 0 3.101.637 3.101 2.376v.348c-5.216-.725-8.81 1.014-8.81 4.55 0 2.956 2.116 4.405 4.608 4.405zm1.13-3.304c-1.014 0-1.651-.609-1.651-1.536 0-1.362 1.362-2.376 4.607-1.855 0 1.855-1.275 3.391-2.956 3.391zm16.606 3.304c2.116 0 4.028-1.246 4.695-2.695h.058s-.087.376-.058.956l.087 1.333h3.941V7.274h-4.318v6.898c0 .664.058 1.036.08 1.15l.007.037h-.058c-.783-1.13-2.434-2.115-4.55-2.115-3.622 0-6.636 2.87-6.636 7.651 0 4.753 3.014 7.65 6.752 7.65zm.782-3.652c-2 0-3.448-1.623-3.448-3.999 0-2.405 1.449-4 3.448-4 1.74 0 3.478 1.334 3.478 4s-1.739 4-3.478 4zM80.29 28.14v-6.347c0-2.376.696-4.607 3.13-4.607 1.449 0 1.855 1.13 1.855 2.492v8.462h4.318v-6.347c0-2.347.637-4.607 3.1-4.607 1.392 0 1.884 1.1 1.884 2.52v8.434h4.347v-9.07c0-3.855-1.796-5.826-5.013-5.826-2 0-3.739 1.217-4.84 2.898-.58-1.652-1.913-2.55-3.564-2.782a4.669 4.669 0 0 0-1.42.03c-1.884.202-3.507 1.42-4.116 2.926h-.058c.03-.145.145-.492.116-1.014l-.116-1.652h-3.97v14.49h4.347zm24.546-16.316c1.45 0 2.406-.927 2.406-2.318 0-1.45-.957-2.348-2.406-2.348-1.478 0-2.405.899-2.405 2.348 0 1.39.927 2.318 2.405 2.318zm2.174 16.316V13.65h-4.347v14.49h4.347zm8.404 0v-7.216c0-2.174 1.362-3.738 3.39-3.738 1.566 0 1.971 1.188 1.971 2.608v8.346h4.347v-9.07c0-3.826-1.768-5.826-5.042-5.826-2.464 0-4.376 1.74-4.985 3.072h-.058c.03-.145.145-.492.116-1.014l-.116-1.652h-3.97v14.49h4.347zm14.809.406c3.941 0 6.114-1.884 6.114-6.347V7.274h-4.462v15.128c0 1.565-.84 2.347-2.377 2.347-.84 0-1.71-.26-2.173-.521v3.767c.521.26 1.594.55 2.898.55zm15.91 0c4.926 0 7.766-2.26 7.766-6.028 0-3.507-2.26-5.043-5.912-6.463-2.84-1.072-3.97-1.912-3.97-3.13 0-1.333 1.391-2.173 3.536-2.173 1.912 0 3.883.55 5.1 1.275V7.912c-1.304-.58-3.361-1.043-5.448-1.043-4.492 0-7.564 2.376-7.564 6.085 0 3.623 2.145 5.159 5.796 6.492 2.87 1.043 4.115 1.768 4.115 3.159 0 1.014-.927 1.623-2.52 1.855-.552.115-1.19.144-1.856.115-1.883-.115-3.796-.753-5.245-1.506v4.289c1.507.666 3.825 1.188 6.202 1.188z"
+-      fill-rule="nonzero" class="text" fill="#0b151e" />
+-    <path
+-      d="M16.275 0 32.55 28.35h-8.64l-1.999-3.483a3.52 3.52 0 0 0-2.831-1.76l-.222-.007h-5.166a3.52 3.52 0 0 0-3.053 1.767L8.638 28.35H0L16.275 0zm0 12.6c-1.912 0-3.463 1.567-3.463 3.5s1.55 3.5 3.463 3.5c1.912 0 3.463-1.567 3.463-3.5s-1.55-3.5-3.463-3.5z"
+-      class="letter" fill="#4d70eb" />
+-  </g>
++<?xml version="1.0" standalone="no"?>
++<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
++ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
++<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
++ width="300.000000pt" height="300.000000pt" viewBox="0 0 300.000000 300.000000"
++ preserveAspectRatio="xMidYMid meet">
++
++<g transform="translate(0.000000,300.000000) scale(0.100000,-0.100000)"
++fill="#000000" stroke="none">
++<path d="M1329 2838 c0 -7 0 -55 1 -107 1 -92 11 -121 39 -121 6 0 11 -11 11
++-25 0 -23 4 -25 46 -25 49 0 74 16 74 49 0 16 6 21 25 21 23 0 25 4 25 40 0
++29 4 40 15 40 8 0 15 5 15 10 0 6 -11 10 -25 10 -16 0 -25 6 -25 15 0 8 -7 15
++-15 15 -8 0 -15 -5 -15 -11 0 -11 -25 -39 -35 -39 -10 0 -35 28 -35 39 0 6 -7
++11 -15 11 -9 0 -15 9 -15 25 0 14 -4 25 -10 25 -5 0 -10 9 -10 20 0 15 -7 20
++-25 20 -14 0 -25 -6 -26 -12z"/>
++<path d="M1400 2520 c0 -5 -11 -10 -25 -10 -14 0 -25 -5 -25 -11 0 -17 -27
++-39 -49 -39 -12 0 -21 -6 -21 -15 0 -9 -9 -15 -25 -15 -14 0 -25 -4 -25 -10 0
++-5 -9 -10 -21 -10 -22 0 -49 -22 -49 -39 0 -6 -11 -11 -25 -11 -14 0 -25 -4
++-25 -10 0 -5 -11 -10 -25 -10 -16 0 -25 -6 -25 -15 0 -9 -9 -15 -25 -15 -14 0
++-25 -4 -25 -10 0 -5 -11 -10 -25 -10 -14 0 -25 -5 -25 -11 0 -14 -25 -39 -39
++-39 -6 0 -11 -11 -11 -25 0 -14 -4 -25 -10 -25 -5 0 -10 -7 -10 -15 0 -8 -7
++-15 -15 -15 -9 0 -15 -9 -15 -25 0 -14 -4 -25 -10 -25 -5 0 -10 -11 -10 -25 0
++-16 -6 -25 -15 -25 -9 0 -15 -9 -15 -23 0 -12 -11 -31 -25 -41 -14 -10 -25
++-27 -25 -37 0 -11 -4 -19 -10 -19 -5 0 -10 -11 -10 -25 0 -16 -6 -25 -15 -25
++-9 0 -15 -9 -15 -21 0 -22 -22 -49 -39 -49 -6 0 -11 -6 -11 -13 0 -7 -9 -19
++-20 -27 -11 -8 -20 -20 -20 -27 0 -7 -7 -13 -15 -13 -9 0 -15 -9 -15 -25 0
++-23 3 -25 50 -25 29 0 50 5 50 11 0 14 25 39 39 39 6 0 11 5 11 11 0 14 25 39
++39 39 6 0 11 11 11 25 0 14 5 25 10 25 6 0 10 11 10 25 0 16 6 25 15 25 9 0
++15 9 15 25 0 14 5 25 10 25 6 0 10 11 10 25 0 16 6 25 15 25 9 0 15 9 15 21 0
++22 22 49 39 49 6 0 11 11 11 25 0 14 5 25 10 25 6 0 10 11 10 25 0 14 5 25 10
++25 6 0 10 11 10 25 0 20 5 25 25 25 16 0 25 6 25 15 0 9 9 15 25 15 14 0 25 5
++25 10 0 6 7 10 15 10 8 0 15 7 15 15 0 9 9 15 25 15 14 0 25 5 25 10 0 6 11
++10 25 10 16 0 25 6 25 15 0 9 9 15 25 15 14 0 25 5 25 10 0 6 9 10 20 10 11 0
++20 7 20 15 0 9 9 15 25 15 14 0 25 5 25 10 0 6 7 10 15 10 8 0 15 5 15 10 0 6
++23 10 50 10 28 0 50 -4 50 -10 0 -5 9 -10 21 -10 22 0 49 -22 49 -39 0 -6 11
++-11 25 -11 14 0 25 -4 25 -10 0 -5 11 -10 25 -10 16 0 25 -6 25 -15 0 -9 9
++-15 25 -15 14 0 25 -4 25 -10 0 -5 11 -10 25 -10 14 0 25 -5 25 -11 0 -17 27
++-39 49 -39 12 0 21 -6 21 -15 0 -9 9 -15 25 -15 20 0 25 -5 25 -25 0 -16 6
++-25 15 -25 9 0 15 -9 15 -23 0 -12 9 -29 20 -37 11 -8 20 -25 20 -37 0 -14 6
++-23 15 -23 9 0 15 -9 15 -25 0 -14 5 -25 10 -25 6 0 10 -11 10 -25 0 -16 6
++-25 15 -25 9 0 15 -9 15 -21 0 -22 22 -49 39 -49 6 0 11 -11 11 -25 0 -14 5
++-25 10 -25 6 0 10 -11 10 -25 0 -16 6 -25 15 -25 8 0 15 -5 15 -11 0 -14 25
++-39 39 -39 6 0 11 -7 11 -15 0 -11 12 -15 45 -15 41 0 45 2 45 25 0 14 -4 25
++-10 25 -5 0 -10 5 -10 11 0 14 -25 39 -39 39 -6 0 -11 5 -11 11 0 14 -25 39
++-39 39 -6 0 -11 11 -11 25 0 14 -4 25 -10 25 -5 0 -10 11 -10 25 0 16 -6 25
++-15 25 -9 0 -15 9 -15 21 0 22 -22 49 -39 49 -6 0 -11 11 -11 25 0 14 -4 25
++-10 25 -5 0 -10 11 -10 25 0 16 -6 25 -15 25 -9 0 -15 9 -15 25 0 14 -4 25
++-10 25 -5 0 -10 11 -10 25 0 16 -6 25 -15 25 -8 0 -15 6 -15 13 0 7 -9 19 -20
++27 -11 8 -20 20 -20 27 0 7 -11 13 -25 13 -14 0 -25 5 -25 10 0 6 -11 10 -25
++10 -16 0 -25 6 -25 15 0 8 -7 15 -15 15 -8 0 -15 -7 -15 -15 0 -8 -4 -15 -10
++-15 -5 0 -10 11 -10 25 0 16 -6 25 -15 25 -8 0 -15 7 -15 15 0 9 -9 15 -25 15
++-14 0 -25 5 -25 10 0 6 -11 10 -25 10 -14 0 -25 5 -25 10 0 6 -9 10 -20 10
++-11 0 -20 7 -20 15 0 9 -9 15 -25 15 -14 0 -25 5 -25 10 0 6 -7 10 -15 10 -8
++0 -15 7 -15 15 0 9 -9 15 -25 15 -14 0 -25 5 -25 10 0 6 -11 10 -25 10 -14 0
++-25 -4 -25 -10z"/>
++<path d="M1400 2375 c0 -9 -9 -15 -25 -15 -14 0 -25 -4 -25 -10 0 -5 -11 -10
++-25 -10 -16 0 -25 -6 -25 -15 0 -8 -9 -15 -20 -15 -11 0 -20 -4 -20 -10 0 -5
++-11 -10 -25 -10 -16 0 -25 -6 -25 -15 0 -8 -7 -15 -15 -15 -8 0 -15 -4 -15
++-10 0 -5 -11 -10 -25 -10 -16 0 -25 -6 -25 -15 0 -9 -9 -15 -25 -15 -14 0 -25
++-4 -25 -10 0 -5 -11 -10 -25 -10 -16 0 -25 -6 -25 -15 0 -8 -4 -15 -10 -15 -5
++0 -10 -11 -10 -25 0 -16 -6 -25 -15 -25 -9 0 -15 -9 -15 -25 0 -14 -4 -25 -10
++-25 -5 0 -10 -11 -10 -25 0 -14 -4 -25 -10 -25 -5 0 -10 -9 -10 -20 0 -11 -7
++-20 -15 -20 -8 0 -15 -7 -15 -15 0 -8 -4 -15 -10 -15 -5 0 -10 -11 -10 -25 0
++-16 -6 -25 -15 -25 -9 0 -15 -9 -15 -25 0 -14 -4 -25 -10 -25 -5 0 -10 -11
++-10 -25 0 -16 -6 -25 -15 -25 -9 0 -15 -9 -15 -21 0 -22 -22 -49 -39 -49 -6 0
++-11 -7 -11 -15 0 -8 -4 -15 -10 -15 -6 0 -10 -47 -10 -120 0 -100 -2 -120 -15
++-120 -8 0 -15 -7 -15 -15 0 -8 7 -15 15 -15 13 0 15 -33 15 -235 l0 -235 160
++0 160 0 0 310 0 310 370 0 370 0 0 -310 0 -310 160 0 160 0 0 124 c0 90 3 126
++13 130 10 5 10 7 0 12 -15 7 -18 104 -3 104 6 0 10 7 10 15 0 8 -4 15 -10 15
++-6 0 -10 63 -10 170 0 144 -2 170 -15 170 -8 0 -15 7 -15 15 0 8 -4 15 -10 15
++-5 0 -10 11 -10 25 0 14 -5 25 -11 25 -17 0 -39 27 -39 49 0 12 -6 21 -15 21
++-9 0 -15 9 -15 25 0 14 -4 25 -10 25 -5 0 -10 11 -10 25 0 16 -6 25 -15 25 -9
++0 -15 9 -15 23 0 12 -9 29 -20 37 -11 8 -20 25 -20 37 0 14 -6 23 -15 23 -9 0
++-15 9 -15 25 0 14 -4 25 -10 25 -5 0 -10 11 -10 25 0 16 -6 25 -15 25 -8 0
++-15 7 -15 15 0 9 -9 15 -25 15 -14 0 -25 5 -25 10 0 6 -11 10 -25 10 -16 0
++-25 6 -25 15 0 9 -9 15 -21 15 -22 0 -49 22 -49 39 0 6 -11 11 -25 11 -14 0
++-25 5 -25 10 0 6 -11 10 -25 10 -16 0 -25 6 -25 15 0 9 -9 15 -25 15 -14 0
++-25 5 -25 10 0 6 -11 10 -25 10 -16 0 -25 6 -25 15 0 9 -9 15 -25 15 -16 0
++-25 -6 -25 -15z m0 -225 c0 -5 11 -10 25 -10 14 0 25 5 25 10 0 6 32 10 75 10
++l75 0 0 -60 0 -60 -75 0 c-43 0 -75 4 -75 10 0 6 -11 10 -25 10 -14 0 -25 -4
++-25 -10 0 -6 -27 -10 -60 -10 l-60 0 0 60 0 60 60 0 c33 0 60 -4 60 -10z m0
++-150 c0 -5 11 -10 25 -10 14 0 25 5 25 10 0 6 32 10 75 10 l75 0 0 -45 c0 -25
++-4 -45 -10 -45 -5 0 -10 -7 -10 -15 0 -12 -14 -15 -65 -15 -51 0 -65 3 -65 15
++0 9 -9 15 -25 15 -16 0 -25 -6 -25 -15 0 -12 -13 -15 -60 -15 l-60 0 0 60 0
++60 60 0 c33 0 60 -4 60 -10z"/>
++<path d="M1160 1510 c0 -5 5 -10 10 -10 6 0 10 -7 10 -15 0 -8 5 -15 11 -15
++14 0 39 -25 39 -39 0 -6 7 -11 15 -11 8 0 15 -4 15 -10 0 -5 9 -10 20 -10 11
++0 20 -7 20 -15 0 -8 5 -15 11 -15 6 0 17 -6 25 -14 8 -8 14 -19 14 -25 0 -6 5
++-11 11 -11 6 0 17 -6 25 -14 8 -8 14 -19 14 -25 0 -6 11 -11 25 -11 16 0 25 6
++25 15 0 8 5 15 11 15 14 0 39 25 39 39 0 6 5 11 11 11 14 0 39 25 39 39 0 6 9
++11 21 11 22 0 49 22 49 39 0 6 5 11 11 11 14 0 39 25 39 39 0 6 7 11 15 11 8
++0 15 5 15 10 0 6 -97 10 -270 10 -173 0 -270 -4 -270 -10z"/>
++<path d="M1110 1460 c0 -5 -7 -10 -15 -10 -13 0 -15 -21 -15 -125 0 -104 2
++-125 15 -125 12 0 15 -18 15 -100 0 -60 4 -100 10 -100 6 0 10 7 10 15 0 8 5
++15 11 15 14 0 39 25 39 39 0 6 5 11 11 11 14 0 39 25 39 39 0 6 10 11 23 11
++12 0 29 9 37 20 8 11 20 20 27 20 7 0 13 5 13 11 0 17 27 39 49 39 12 0 21 5
++21 11 0 14 -25 39 -39 39 -6 0 -11 7 -11 15 0 9 -9 15 -21 15 -19 0 -49 21
++-49 35 0 10 -28 35 -39 35 -6 0 -11 5 -11 11 0 14 -25 39 -39 39 -6 0 -11 7
++-11 15 0 9 -9 15 -25 15 -14 0 -25 5 -25 10 0 6 -4 10 -10 10 -5 0 -10 -4 -10
++-10z"/>
++<path d="M1700 1460 c0 -5 -7 -10 -15 -10 -8 0 -15 -5 -15 -11 0 -6 -6 -17
++-14 -25 -8 -8 -19 -14 -25 -14 -6 0 -11 -6 -11 -13 0 -7 -9 -19 -20 -27 -11
++-8 -20 -20 -20 -27 0 -7 -7 -13 -15 -13 -8 0 -15 -4 -15 -10 0 -5 -11 -10 -25
++-10 -16 0 -25 -6 -25 -15 0 -8 -4 -15 -10 -15 -5 0 -10 -9 -10 -21 0 -22 22
++-49 39 -49 6 0 11 -5 11 -11 0 -16 26 -39 45 -39 19 0 45 -23 45 -39 0 -6 5
++-11 11 -11 14 0 39 -25 39 -39 0 -6 5 -11 11 -11 14 0 39 -25 39 -39 0 -6 7
++-11 15 -11 13 0 15 33 15 235 l0 235 -25 0 c-14 0 -25 -4 -25 -10z"/>
++<path d="M1400 1189 c0 -17 -27 -39 -49 -39 -12 0 -21 -4 -21 -10 0 -5 -7 -10
++-15 -10 -8 0 -15 -6 -15 -13 0 -7 -9 -19 -20 -27 -11 -8 -20 -20 -20 -27 0 -7
++-5 -13 -11 -13 -6 0 -17 -6 -25 -14 -8 -8 -14 -19 -14 -25 0 -6 -11 -11 -25
++-11 -14 0 -25 -4 -25 -10 0 -5 -7 -10 -15 -10 -8 0 -15 -7 -15 -15 0 -13 39
++-15 295 -15 203 0 295 3 295 11 0 14 -25 39 -39 39 -6 0 -11 7 -11 15 0 9 -9
++15 -21 15 -19 0 -49 21 -49 35 0 10 -28 35 -39 35 -6 0 -11 5 -11 11 0 17 -27
++39 -49 39 -12 0 -21 5 -21 10 0 6 -7 10 -15 10 -8 0 -15 7 -15 15 0 9 -9 15
++-25 15 -14 0 -25 -5 -25 -11z"/>
++<path d="M170 890 c0 -7 425 -10 1255 -10 830 0 1255 3 1255 10 0 7 -425 10
++-1255 10 -830 0 -1255 -3 -1255 -10z"/>
++<path d="M940 525 l0 -185 70 0 c40 0 70 4 70 10 0 6 7 10 15 10 12 0 15 15
++15 75 0 60 -3 75 -15 75 -9 0 -15 9 -15 25 0 16 6 25 15 25 12 0 15 13 15 60
++0 47 -3 60 -15 60 -8 0 -15 7 -15 15 0 12 -14 15 -70 15 l-70 0 0 -185z m120
++85 l0 -50 -40 0 -40 0 0 50 0 50 40 0 40 0 0 -50z m-30 -115 c0 -8 7 -15 15
++-15 11 0 15 -12 15 -50 0 -38 -4 -50 -15 -50 -8 0 -15 -4 -15 -10 0 -5 -11
++-10 -25 -10 -24 0 -25 2 -25 75 0 73 1 75 25 75 16 0 25 -6 25 -15z"/>
++<path d="M1260 695 c0 -8 -7 -15 -15 -15 -12 0 -15 -15 -15 -75 0 -43 -4 -75
++-10 -75 -6 0 -10 -32 -10 -75 0 -60 -3 -75 -15 -75 -10 0 -15 -11 -15 -35 0
++-24 5 -35 15 -35 8 0 15 7 15 15 0 8 5 15 10 15 6 0 10 9 10 20 0 17 7 20 50
++20 43 0 50 -3 50 -20 0 -15 7 -20 25 -20 24 0 25 2 25 70 0 56 -3 70 -15 70
++-12 0 -15 15 -15 75 0 43 -4 75 -10 75 -5 0 -10 18 -10 40 0 39 -1 40 -35 40
++-24 0 -35 -5 -35 -15z m40 -150 c0 -51 3 -65 15 -65 8 0 15 -4 15 -10 0 -5 -7
++-10 -15 -10 -8 0 -15 -7 -15 -15 0 -8 -9 -15 -20 -15 -18 0 -20 7 -20 65 0 37
++4 65 10 65 6 0 10 11 10 25 0 14 5 25 10 25 6 0 10 -28 10 -65z"/>
++<path d="M1480 525 l0 -185 25 0 c24 0 25 2 25 70 0 64 2 70 21 70 35 0 49
++-24 49 -84 0 -53 1 -56 25 -56 24 0 25 2 25 70 0 56 -3 70 -15 70 -9 0 -15 9
++-15 25 0 16 6 25 15 25 12 0 15 15 15 75 0 60 -3 75 -15 75 -8 0 -15 7 -15 15
++0 12 -14 15 -70 15 l-70 0 0 -185z m120 85 c0 -27 -4 -50 -10 -50 -5 0 -10 -7
++-10 -15 0 -9 -9 -15 -25 -15 -24 0 -25 2 -25 65 l0 65 35 0 35 0 0 -50z"/>
++<path d="M1750 525 l0 -185 25 0 c14 0 25 5 25 10 0 6 -7 10 -15 10 -12 0 -15
++19 -15 110 0 72 4 110 11 110 23 0 39 -30 39 -74 0 -34 4 -46 15 -46 11 0 15
++-12 15 -46 0 -49 16 -74 49 -74 20 0 21 5 21 185 l0 185 -25 0 c-25 0 -25 -1
++-25 -90 0 -53 -4 -90 -10 -90 -5 0 -10 18 -10 40 0 29 -4 40 -15 40 -11 0 -15
++12 -15 50 l0 50 -35 0 -35 0 0 -185z"/>
++<path d="M200 125 c0 -13 58 -15 465 -15 407 0 465 2 465 15 0 13 -58 15 -465
++15 -407 0 -465 -2 -465 -15z"/>
++<path d="M1160 125 c0 -10 11 -15 35 -15 24 0 35 5 35 15 0 10 -11 15 -35 15
++-24 0 -35 -5 -35 -15z"/>
++<path d="M1280 125 c0 -12 16 -15 85 -15 69 0 85 3 85 15 0 12 -16 15 -85 15
++-69 0 -85 -3 -85 -15z"/>
++<path d="M1480 125 c0 -8 5 -15 10 -15 6 0 10 7 10 15 0 8 -4 15 -10 15 -5 0
++-10 -7 -10 -15z"/>
++<path d="M1530 125 c0 -12 19 -15 110 -15 91 0 110 3 110 15 0 12 -19 15 -110
++15 -91 0 -110 -3 -110 -15z"/>
++<path d="M1770 125 c0 -11 11 -15 40 -15 29 0 40 4 40 15 0 11 -11 15 -40 15
++-29 0 -40 -4 -40 -15z"/>
++<path d="M1870 125 c0 -13 33 -15 235 -15 202 0 235 2 235 15 0 13 -33 15
++-235 15 -202 0 -235 -2 -235 -15z"/>
++<path d="M2390 125 c0 -10 11 -15 35 -15 24 0 35 5 35 15 0 10 -11 15 -35 15
++-24 0 -35 -5 -35 -15z"/>
++<path d="M2560 125 c0 -8 5 -15 10 -15 6 0 10 7 10 15 0 8 -4 15 -10 15 -5 0
++-10 -7 -10 -15z"/>
++<path d="M2630 125 c0 -8 7 -15 15 -15 8 0 15 7 15 15 0 8 -7 15 -15 15 -8 0
++-15 -7 -15 -15z"/>
++</g>
+ </svg>
+diff --git a/node_modules/adminjs/src/locale/config.ts b/node_modules/adminjs/src/locale/config.ts
+index 923a5d0..09ba604 100644
+--- a/node_modules/adminjs/src/locale/config.ts
++++ b/node_modules/adminjs/src/locale/config.ts
+@@ -9,7 +9,7 @@ import { formatName } from '../utils/translate-functions.factory'
+  */
+ export type Locale = {
+   /** Language ISO string like: 'en' 'pl' or 'de' */
+-  language: string;
++  language: pl;
+   /**
+    * All the translations.
+    */
+diff --git a/node_modules/adminjs/src/locale/en.ts b/node_modules/adminjs/src/locale/en-original.ts
+similarity index 100%
+rename from node_modules/adminjs/src/locale/en.ts
+rename to node_modules/adminjs/src/locale/en-original.ts
+diff --git a/node_modules/adminjs/src/locale/nl.ts b/node_modules/adminjs/src/locale/nl.ts
+new file mode 100644
+index 0000000..ae3a8da
+--- /dev/null
++++ b/node_modules/adminjs/src/locale/nl.ts
+@@ -0,0 +1,98 @@
++/* spellchecker: disable */
++
++const translations = {
++  actions: {
++    new: 'Nieuw',
++    edit: 'Bewerk',
++    show: 'Toon',
++    delete: 'Verwijder',
++    bulkDelete: 'Verwijder alles',
++    list: 'Lijst',
++  },
++  buttons: {
++    save: 'Bewaar',
++    addNewItem: 'Voeg toe',
++    filter: 'Filter',
++    applyChanges: 'Bewaar wijzigingen',
++    resetFilter: 'Herstel',
++    confirmRemovalMany: 'Bevestig het verwijderen van {{count}} item(s)',
++    confirmRemovalMany_plural: 'Bevestig verwijdering van {{count}} item(s)',
++    logout: 'Afmelden',
++    login: 'Aanmelden',
++    seeTheDocumentation: 'Zie: <1>De documentatie</1>',
++    createFirstRecord: 'Voeg eerste item toe',
++  },
++  labels: {
++    navigation: 'Navigatie',
++    pages: 'Pagina',
++    selectedRecords: 'Selecteer ({{selected}})',
++    filters: 'Filters',
++    adminVersion: 'Admin: {{version}}',
++    appVersion: 'App: {{version}}',
++    loginWelcome: 'Welkom',
++    dashboard: 'Barn the App',
++  },
++  properties: {
++    length: 'Lengte',
++    from: 'Van',
++    to: 'Tot',
++  },
++  resources: {},
++  messages: {
++    successfullyBulkDeleted: '{{count}} verwijderd',
++    successfullyBulkDeleted_plural: 'successfully removed {{count}} records',
++    successfullyDeleted: 'Successfully deleted given record',
++    successfullyUpdated: 'Successfully updated given record',
++    thereWereValidationErrors: 'There are validation errors - check them out below',
++    forbiddenError: 'You cannot perform action {{actionName}} on {{resourceId}}',
++    anyForbiddenError: 'You cannot perform given action',
++    successfullyCreated: 'Successfully created a new record',
++    bulkDeleteError: 'There was an error deleting records, Check out console to see more information',
++    errorFetchingRecords: 'There was an error fetching records, Check out console to see more information',
++    errorFetchingRecord: 'There was an error fetching record, Check out console to see more information',
++    noRecordsSelected: 'You have not selected any records',
++    theseRecordsWillBeRemoved: 'Following record will be removed',
++    theseRecordsWillBeRemoved_plural: 'Following records will be removed',
++    pickSomeFirstToRemove: 'In order to remove records, you have to pick them first',
++    error404Resource: 'Resource of given id: {{resourceId}} cannot be found',
++    error404Action: 'Resource of given id: {{resourceId}} does not have an action with name: {{actionName}} or you are not authorized to use it!',
++    error404Record: 'Resource of given id: {{resourceId}} does not have a record with id: {{recordId}} or you are not authorized to use it!',
++    seeConsoleForMore: 'See development console for more details...',
++    noActionComponent: 'You have to implement action component for your Action',
++    noRecordsInResource: 'There are no records in this resource',
++    noRecords: 'No records',
++    confirmDelete: 'Weet je zeker dat je dit item wilt verwijderen?',
++    welcomeOnBoard_title: 'Welkom bij Barn!',
++    welcomeOnBoard_subtitle: 'Now you are one of us! We prepared a few tips for you to start:',
++    loginWelcome: 'to AdminJS – the world\'s leading open-source auto-generated admin panel for your Node.js application that allows you to manage all your data in one place',
++    addingResources_title: 'Voeg spullen toe',
++    addingResources_subtitle: 'Liggen er spulletjes weg te stoffen in je garage, schuur of zolder? Bied ze aan!',
++    customizeResources_title: 'Eigen cirkel',
++    customizeResources_subtitle: 'Je kiest zelf met wie je je spulletjes deelt',
++    customizeActions_title: 'Customize Actions',
++    customizeActions_subtitle: 'Modifying existing actions and adding new',
++    writeOwnComponents_title: 'Write Components',
++    writeOwnComponents_subtitle: 'How to modify the Look and Feel of AdminJS',
++    customDashboard_title: 'Custom Dashboard',
++    customDashboard_subtitle: 'How to modify this view and add new Pages on the sidebar',
++    roleBasedAccess_title: 'Role-Based Access Control',
++    roleBasedAccess_subtitle: 'Create user roles and permissions in AdminJS',
++    community_title: 'Join the slack community',
++    community_subtitle: 'Talk with the creators of AdminJS and other AdminJS users',
++    foundBug_title: 'Found a Bug? need improvement?',
++    foundBug_subtitle: 'Raise an issue on our GitHub repo',
++    needMoreSolutions_title: 'Need more advanced solutions?',
++    needMoreSolutions_subtitle: 'We are here to provide you a beautiful UX/UI design and tailor made software based (not only) on AdminJS',
++    invalidCredentials: 'Verkeerde email of wachtwoord',
++    keyPlaceholder: 'KEY',
++    valuePlaceholder: 'VALUE',
++    initialKey: 'Key-{{number}}',
++    keyInUse: 'Object keys must be unique.',
++    keyValuePropertyDefaultDescription: 'All values are stored as text. Keys must be unique, duplicate keys will not be saved.',
++  },
++}
++
++export default {
++  language: 'nl',
++  translations,
++}
