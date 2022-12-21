@@ -8,7 +8,7 @@ declare global {
         }
     }
 
-    /* Global variables follow. They *must* use var to work.
+    /* Global variables follows. They *must* use var to work.
         and cannot be initialized here. */
 
     // eslint-disable-next-line no-var
