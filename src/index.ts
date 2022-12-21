@@ -15,7 +15,7 @@ global.Foo = "Bar";
 
 /* ------------------------------------ Set up Mongoose ------------------------------------ */
 const app = Express();
-mongoose.connect("mongodb+srv://barnybarny:6R57AWuiFkFOud94@cluster0.ypzzozv.mongodb.net/?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://itemadmin:mJUAhuf7j9VXkiq6@item-input-db.dhrfvdq.mongodb.net/?retryWrites=true&w=majority");
 
 /* mongodb+srv://itemadmin:mJUAhuf7j9VXkiq6@item-input-db.dhrfvdq.mongodb.net/?retryWrites=true&w=majority mongodb+srv://barnybarny:6R57AWuiFkFOud94@cluster0.ypzzozv.mongodb.net/?retryWrites=true&w=majority */
 
